@@ -1,7 +1,5 @@
 package database;
 
-import jdk.jshell.spi.ExecutionControl.NotImplementedException;
-
 import java.io.*;
 import java.util.ArrayList;
 
@@ -34,17 +32,21 @@ public abstract class Database<Type> {
   }
 
   // Creates an Object from a database line, REQUIRES IMPLEMENTATION
-  protected Type deserialize(String[] data) throws NotImplementedException {
-    throw new NotImplementedException("Requires deserialize function");
+  protected Type deserialize(String[] data) {
+    System.err.println("deserialize requires implementation");
+    System.exit(1);
+    return null;
   }
 
   // Reduces an Object to a sequence of strings, REQUIRES IMPLEMENTATION
-  protected String[] serialize(Type data) throws NotImplementedException {
-    throw new NotImplementedException("Requires serialize function");
+  protected String[] serialize(Type data) {
+    System.err.println("serialize requires implementation");
+    System.exit(1);
+    return null;
   }
 
   // Reads the database
-  protected final ArrayList<Type> get() throws IOException, NotImplementedException {
+  protected final ArrayList<Type> get() throws IOException {
     try {
       BufferedReader reader = new BufferedReader(new FileReader(this.path));
       ArrayList<Type> list = new ArrayList<>();
@@ -67,7 +69,7 @@ public abstract class Database<Type> {
   }
 
   // Deletes and rewrites the database
-  protected void set(ArrayList<Type> data) throws IOException, NotImplementedException {
+  protected void set(ArrayList<Type> data) throws IOException {
     try {
       FileWriter writer = new FileWriter(this.path, false); // False will overwrite the file
 

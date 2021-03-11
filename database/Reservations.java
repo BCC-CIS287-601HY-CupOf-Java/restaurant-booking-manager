@@ -50,13 +50,13 @@ public class Reservations extends Database<ReservationItem> {
    * Object enters and exits the database properly.
    */
   @Override
-  protected ReservationItem deserialize(String[] data) throws NotImplementedException {
+  protected ReservationItem deserialize(String[] data) {
     return new ReservationItem(Reservations.stringToDate(data[0]), Reservations.stringToDate(data[1]), data[2], data[3],
         Integer.parseInt(data[4]), data[5], data[6]);
   }
 
   // This is a simple database opperation to add a new reservation item
-  public void createNewReservation(ReservationItem item) throws NotImplementedException, IOException {
+  public void createNewReservation(ReservationItem item) throws IOException {
     ArrayList<ReservationItem> existing = this.get(); // Load the database into active memory
 
     existing.add(item); // Add the reservation object
