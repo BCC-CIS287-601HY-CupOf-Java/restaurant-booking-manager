@@ -8,7 +8,7 @@ import java.util.Date;
  * meant to be used to create database items too
  */
 
-public class ReservationItem {
+public class ReservationItem extends ItemID {
   private Calendar reservedTimeStart;
   private Calendar reservedTimeEnd;
   private String name;
@@ -19,6 +19,13 @@ public class ReservationItem {
 
   public ReservationItem(Date start, Date end, String name, String phoneNumber, Integer numberOfPeople, String table,
       String notes) {
+    this(start, end, name, phoneNumber, numberOfPeople, table, notes, ItemID.genID());
+  }
+
+  public ReservationItem(Date start, Date end, String name, String phoneNumber, Integer numberOfPeople, String table,
+      String notes, String id) {
+    super();
+
     this.reservedTimeStart = Calendar.getInstance();
     this.reservedTimeStart.setTime(start);
     this.reservedTimeEnd = Calendar.getInstance();
@@ -28,6 +35,7 @@ public class ReservationItem {
     this.numberOfPeople = numberOfPeople;
     this.table = table;
     this.notes = notes;
+    this.id = id;
   }
 
   public Calendar getStartTime() {
@@ -57,4 +65,5 @@ public class ReservationItem {
   public String getNotes() {
     return this.notes;
   }
+
 }
