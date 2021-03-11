@@ -1,5 +1,6 @@
 package database;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -8,8 +9,8 @@ import java.util.Date;
  */
 
 public class ReservationItem {
-  private Date reservedTimeStart;
-  private Date reservedTimeEnd;
+  private Calendar reservedTimeStart;
+  private Calendar reservedTimeEnd;
   private String name;
   private String phoneNumber;
   private Integer numberOfPeople;
@@ -18,8 +19,10 @@ public class ReservationItem {
 
   public ReservationItem(Date start, Date end, String name, String phoneNumber, Integer numberOfPeople, String table,
       String notes) {
-    this.reservedTimeStart = start;
-    this.reservedTimeEnd = end;
+    this.reservedTimeStart = Calendar.getInstance();
+    this.reservedTimeStart.setTime(start);
+    this.reservedTimeEnd = Calendar.getInstance();
+    this.reservedTimeEnd.setTime(end);
     this.name = name;
     this.phoneNumber = phoneNumber;
     this.numberOfPeople = numberOfPeople;
@@ -27,11 +30,11 @@ public class ReservationItem {
     this.notes = notes;
   }
 
-  public Date getStartTime() {
+  public Calendar getStartTime() {
     return this.reservedTimeStart;
   }
 
-  public Date getEndTime() {
+  public Calendar getEndTime() {
     return this.reservedTimeEnd;
   }
 

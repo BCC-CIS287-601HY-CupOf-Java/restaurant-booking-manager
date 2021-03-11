@@ -20,11 +20,6 @@ public class Reservations extends Database<ReservationItem> {
   }
 
   // Helper function
-  private static String dateToString(Date d) {
-    return String.valueOf((d.getTime()));
-  }
-
-  // Helper function
   private static Date stringToDate(String d) {
     return new Date(Long.parseLong(d));
   }
@@ -38,9 +33,10 @@ public class Reservations extends Database<ReservationItem> {
    * whenever it wants with whatever ReservationItem it wants.
    */
   @Override
-  protected String[] serialize(ReservationItem data) throws NotImplementedException {
-    return new String[] { Reservations.dateToString(data.getStartTime()), Reservations.dateToString(data.getEndTime()),
-        data.getName(), data.getPhoneNumber(), data.getNumberOfPeople().toString(), data.getTable(), data.getNotes() };
+  protected String[] serialize(ReservationItem data) {
+    return new String[] { String.valueOf(data.getStartTime().getTimeInMillis()),
+        String.valueOf(data.getEndTime().getTimeInMillis()), data.getName(), data.getPhoneNumber(),
+        data.getNumberOfPeople().toString(), data.getTable(), data.getNotes() };
   }
 
   /**
