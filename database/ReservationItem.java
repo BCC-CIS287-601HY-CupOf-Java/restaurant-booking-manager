@@ -2,6 +2,11 @@ package database;
 
 import java.util.Date;
 
+/**
+ * This is a simple data structure item with readonly getters. This is also
+ * meant to be used to create database items too
+ */
+
 public class ReservationItem {
   private Date reservedTimeStart;
   private Date reservedTimeEnd;
