@@ -105,4 +105,8 @@ public abstract class Database<Type extends ItemID> {
     existing.removeIf(x -> item.equals(x));
     this.set(existing);
   }
+
+  public ArrayList<Type> getAll() throws IOException {
+    return this.get();
+  }
 }
