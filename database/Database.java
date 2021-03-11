@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * private.
  */
 
-public abstract class Database<Type> {
+public abstract class Database<Type extends ItemID> {
   private String path;
 
   // DELIMITER should be something that won't be in the value of an object
@@ -92,5 +92,17 @@ public abstract class Database<Type> {
       f.createNewFile();
       this.set(data);
     }
+  }
+
+  public void addItem(Type item) throws IOException {
+    ArrayList<Type> existing = this.get();
+    existing.add(item);
+    this.set(existing);
+  }
+
+  public void deleteItem(Type item) throws IOException {
+    ArrayList<Type> existing = this.get();
+    existing.removeIf(x -> item.equals(x));
+    this.set(existing);
   }
 }

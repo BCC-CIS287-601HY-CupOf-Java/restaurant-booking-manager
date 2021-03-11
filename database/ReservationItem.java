@@ -65,5 +65,4 @@ public class ReservationItem extends ItemID {
   public String getNotes() {
     return this.notes;
   }
-
 }

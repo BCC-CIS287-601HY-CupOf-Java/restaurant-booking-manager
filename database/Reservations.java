@@ -36,7 +36,7 @@ public class Reservations extends Database<ReservationItem> {
   protected String[] serialize(ReservationItem data) {
     return new String[] { String.valueOf(data.getStartTime().getTimeInMillis()),
         String.valueOf(data.getEndTime().getTimeInMillis()), data.getName(), data.getPhoneNumber(),
-        data.getNumberOfPeople().toString(), data.getTable(), data.getNotes() };
+        data.getNumberOfPeople().toString(), data.getTable(), data.getNotes(), data.id };
   }
 
   /**
@@ -48,7 +48,9 @@ public class Reservations extends Database<ReservationItem> {
   @Override
   protected ReservationItem deserialize(String[] data) {
     return new ReservationItem(Reservations.stringToDate(data[0]), Reservations.stringToDate(data[1]), data[2], data[3],
-        Integer.parseInt(data[4]), data[5], data[6]);
+        Integer.parseInt(data[4]), data[5], data[6], data[7]);
+  }
+
   }
 
   // This is a simple database opperation to add a new reservation item

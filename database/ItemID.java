@@ -16,6 +16,6 @@ public class ItemID {
   public boolean equals(Object arg) {
     ItemID item = (ItemID) arg;
 
-    return item.id == this.id;
+    return this.id.equals(item.id);
   }
 }
