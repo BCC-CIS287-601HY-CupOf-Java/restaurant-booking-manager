@@ -51,14 +51,28 @@ public class Reservations extends Database<ReservationItem> {
         Integer.parseInt(data[4]), data[5], data[6], data[7]);
   }
 
+  private interface CalendarCheck {
+    boolean check(Calendar c);
   }
 
-  // This is a simple database opperation to add a new reservation item
-  public void createNewReservation(ReservationItem item) throws IOException {
-    ArrayList<ReservationItem> existing = this.get(); // Load the database into active memory
+  public ArrayList<ReservationItem> getReservationsForDate(Integer year, Integer month, Integer day)
+      throws IOException {
+    ArrayList<ReservationItem> existing = this.get();
 
-    existing.add(item); // Add the reservation object
+    CalendarCheck checker = c -> {
+      boolean d = c.get(Calendar.YEAR) == year;
+      d = d && c.get(Calendar.MONTH) == month;
+      d = d && c.get(Calendar.DAY_OF_MONTH) == day;
+      return d;
+    };
 
-    this.set(existing); // Then save it, it's that easy
+    existing.removeIf(reservation -> {
+      Calendar start = reservation.getStartTime();
+      Calendar end = reservation.getEndTime();
+
+      return checker.check(start) && checker.check(end);
+    });
+
+    return existing;
   }
 }
