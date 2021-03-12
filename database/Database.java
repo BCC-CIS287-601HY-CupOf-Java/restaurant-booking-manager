@@ -109,4 +109,18 @@ public abstract class Database<Type extends ItemID> {
   public ArrayList<Type> getAll() throws IOException {
     return this.get();
   }
+
+  public Boolean editItem(Type old, Type replace) throws IOException {
+    ArrayList<Type> existing = this.get();
+
+    for (int i = 0; i < existing.size(); i++) {
+      if (old.equals(existing.get(i))) {
+        existing.set(i, replace);
+        this.set(existing);
+        return true;
+      }
+    }
+
+    return false;
+  }
 }
